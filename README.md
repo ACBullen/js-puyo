@@ -38,7 +38,7 @@ easel.
 
 Day 2:
 Establish board class and methods. Get easel ticking running. Create logic
-for randomized tetramino generation, logic for switching in and out of hold
+for randomized tetramino generation, logic for switchi.ng in and out of hold
 state, score and time counters, etc.
 
 Day 3:
