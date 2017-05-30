@@ -1,28 +1,34 @@
-# JS Tetris
+# JS Pop
 ___
-### About Tetris
+### About JS Pop
 
-Tetris is a game of visio-spatial awareness where a variety of shapes
-comprised of four square blocks fall from the top of the screen which the
-player arranges and stacks in order to create full rows at the bottom which
-then disappear, scoring points. This project will replicate the game in its
-classic version with a slowly increasing speed as time goes on and level
-advances.
+JS Pop is a single-player variation on the Puyo Pop game where two-block rectangles
+of different colors drop from the top of the screen and can be shifted and
+rotated in the air to form a pile at the bottom. Scoring is handled by
+clearing collections of various colors with special breaker blocks which
+periodically drop and clear all blocks that share a side of the same color
+that reach up to where the breaker block lands. Longer chains result in higher
+score, and the game progresses with random blocks falling until they reach
+the top and there is no more space for a block to fall in.
+
 
 ## Functionality & MVP
 
-The game should be a working version of the classic tetris style with:
+The game should be a working version of single-player Puyo Pop with:
 - a welcome/controls splash
-- active running game board that clears when rows are completed
-- shape hold area
+- active running game board that clears blocks when breaker blocks of a matching
+color touches it or an adjacent block of the same color.
+- blocks correctly fall when no longer supported after a break.
+- next block up display
 - appropriate score/game time display.
 
 ## Wireframe
 
-The game should replicate the usual 10x20 square board, have a display for
-a held element, score/time display and a splash for the rules before the game begins.
+The game should replicate the usual 10x20 square board, have a display for the next pair to drop, score/time display and a splash for the rules before the game begins.
 
-![tetris board](docs/wireframes/tetris_mock.png)
+![puyo board](docs/wireframes/jspuyo.png)
+
+![puyo clearing example](docs/wireframes/puyo-clear-ex.png)
 
 
 ## Architecture and packages
@@ -38,12 +44,12 @@ easel.
 
 Day 2:
 Establish board class and methods. Get easel ticking running. Create logic
-for randomized tetramino generation, logic for switchi.ng in and out of hold
-state, score and time counters, etc.
+for randomized block generation (and guaranteed breaker block generation),
+score and time counters, etc.
 
 Day 3:
-Inputs and splash/instructions page. Establish and test row clear logic and
-animation.
+Inputs and splash/instructions page. Establish and test row clear logic falling
+unsupported puyo block logic.
 
 Day4:
 Bugfixing and styling touches. Potentially implement audio if time permits.

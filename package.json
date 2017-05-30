@@ -1,0 +1,27 @@
+{
+  "name": "jstetris",
+  "version": "1.0.0",
+  "description": "Browser tetris game",
+  "main": "bundle.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {
+    "easeljs": "0.0.0",
+    "webpack": "^2.6.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ACBullen/JS-Tetris.git"
+  },
+  "author": "Alexander Bullen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ACBullen/JS-Tetris/issues"
+  },
+  "homepage": "https://github.com/ACBullen/JS-Tetris#readme"
+}
