@@ -17,6 +17,7 @@ class Board {
       let newPuyo = this.basePuyo.generatePuyo();
       if(newPuyo.breaker){
         breakerPresent = true;
+        console.log("hit");
       }
       newQueue.push(newPuyo);
     }
@@ -27,6 +28,11 @@ class Board {
     }
 
     return newQueue;
+  }
+
+  renderBoard(stage){
+
+
   }
 
 
