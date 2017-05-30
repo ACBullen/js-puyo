@@ -1,4 +1,5 @@
-
+import Board from './board.js';
+import Puyo from './puyo.js';
 
 document.addEventListener("DOMContentLoaded", ()=>{
   function init(){
@@ -15,5 +16,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     stage.addChild(circle2);
     stage.update();
   }
+  window.Board = Board;
+  window.Puyo = Puyo;
   init();
 })

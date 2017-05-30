@@ -26,12 +26,11 @@ class Puyo {
   }
 
   isAdjacent(puyo){
-    let adjacent = false;
-    if( (this.yCoord - puyo.yCoord < 21 && this.yCoord !== puyo.yCoord)||
-    (this.xCoord - puyo.yCoord < 21 && this.)){
-      adjacent = true;
+    let adj = false;
+    if((this.yCoord - puyo.yCoord < 21 && this.yCoord !== puyo.yCoord) || (this.xCoord - puyo.yCoord < 21 && this.xCoord !== puyo.x)){
+      adj = true;
     }
-    return adjacent;
+    return adj;
   }
 
   adjacentPuyos(grid){
@@ -46,18 +45,18 @@ class Puyo {
     })
   }
 
-  generatePuyo(){
+  generatePuyo (){
     let colors = ["red", "green", "yellow", "red"];
     let randColor = colors[Math.floor(Math.random() * 4)];
     let breaker = false;
-    if ((Math.random() * 2 + 1) > 1){
+    if (Math.floor(Math.random() * 4 + 1) > 3){
       breaker = true;
     }
     let childPuyo = new  Puyo(randColor, false, breaker, null, 120, 20)
-    return new Puyo(randColor, false, breaker, 100, childPuyo, 20)
+    return new Puyo(randColor, false, breaker, childPuyo, 100, 20)
   }
 
-  generateBreakerPuyo(){
+  generateBreakerPuyo (){
     let puyo = generatePuyo();
     puyo.breaker = true;
     puyo.childPuyo.breaker = true;
