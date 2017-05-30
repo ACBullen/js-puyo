@@ -12,13 +12,20 @@ class Puyo {
   supported(grid) {
     let isSupported = false;
 
-    if(this.yCoord === 10){
+    if(this.yCoord === 460){
       isSupported = true;
       return isSupported;
     }
-    grid.forEach((puyo) => {
-      if (this.yCoord - puyo.yCoord < 21 && this.yCoord !== puyo.yCoord ){
+
+    grid.forEach((puyo, idx, grid) => {
+      if (puyo === this.childPuyo){
+        if (puyo.supported(grid) && puyo.xCoord === this.xCoord){
+          isSupported = true;
+
+        }
+      } else if ((puyo.yCoord - this.yCoord < 41 && this.yCoord !== puyo.yCoord )&&(this.xCoord === puyo.xCoord)){
         isSupported = true;
+
       }
     })
 
@@ -52,7 +59,7 @@ class Puyo {
     if (Math.floor(Math.random() * 4 + 1) > 3){
       breaker = true;
     }
-    let childPuyo = new  Puyo(randColor, false, breaker, null, 120, 20)
+    let childPuyo = new Puyo(randColor, false, breaker, null, 140, 20)
     return new Puyo(randColor, false, breaker, childPuyo, 100, 20)
   }
 
