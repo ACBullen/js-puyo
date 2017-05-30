@@ -35,10 +35,20 @@ The game should replicate the usual 10x20 square board, have a display for the n
 
 This project will primarily use canvas via Easel.js to render the
 game state and advance the position of the falling tiles. Webpack will
-be used to collate and load all files in the program
+be used to collate and load all files in the program. JQuery will be used to
+access and interact with the canvas.
+
+### File Structure
+
+- board.js: Renders board, tracks filled tiles, holds block queue.
+- block.js: holds logic for generating blocks, class information for color,
+breaker status, active or not.
+- game.js: Holds input logic, scoring logic, game-over check.
+
+## Implementation Plan
 
 Day 1:
-General set-up. Get webpack and packages set-up/n=installed. Establish a
+General set-up. Get webpack and packages set-up/installed. Establish a
 base html document with an canvas instance. Start working with setting up
 easel.
 
