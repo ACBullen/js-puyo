@@ -58,8 +58,7 @@ for randomized block generation (and guaranteed breaker block generation),
 score and time counters, etc.
 
 Day 3:
-Inputs and splash/instructions page. Establish and test row clear logic falling
-unsupported puyo block logic.
+Inputs and splash/instructions page. User Controls.
 
 Day4:
 Bugfixing and styling touches. Potentially implement audio if time permits.

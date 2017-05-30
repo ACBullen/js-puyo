@@ -23,18 +23,17 @@ class Puyo {
           isSupported = true;
 
         }
-      } else if ((puyo.yCoord - this.yCoord < 41 && this.yCoord !== puyo.yCoord )&&(this.xCoord === puyo.xCoord)){
+      } else if ((puyo.yCoord - this.yCoord === 40 && this.yCoord !== puyo.yCoord )&&(this.xCoord === puyo.xCoord)){
         isSupported = true;
 
       }
     })
-
     return isSupported;
   }
 
   isAdjacent(puyo){
     let adj = false;
-    if((this.yCoord - puyo.yCoord < 21 && this.yCoord !== puyo.yCoord) || (this.xCoord - puyo.yCoord < 21 && this.xCoord !== puyo.x)){
+    if((Math.abs(puyo.yCoord - this.yCoord) < 41 && this.yCoord !== puyo.yCoord) || (Math.abs(this.xCoord - puyo.yCoord) < 41 && this.xCoord !== puyo.x)){
       adj = true;
     }
     return adj;
@@ -64,7 +63,7 @@ class Puyo {
   }
 
   generateBreakerPuyo (){
-    let puyo = generatePuyo();
+    let puyo = this.generatePuyo();
     puyo.breaker = true;
     puyo.childPuyo.breaker = true;
     return puyo;

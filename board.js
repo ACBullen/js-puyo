@@ -14,6 +14,10 @@ class Board {
     this.activePuyo.xCoord = 100;
     this.activePuyo.yCoord = 20;
 
+    let diamond = new Image();
+    diamond.src = "./singleDiamond.png"
+    this.bitmap = new createjs.Bitmap(diamond);
+
   }
 
   fillQueue(remnant){
@@ -40,8 +44,14 @@ class Board {
     this.grid.forEach((puyo)=>{
 
       let circle = new createjs.Shape();
-      circle.graphics.beginFill(puyo.color).drawCircle(puyo.xCoord,puyo.yCoord,20);
       stage.addChild(circle);
+      circle.graphics.beginFill(puyo.color).drawCircle(puyo.xCoord,puyo.yCoord,20);
+      if (puyo.breaker){
+        this.bitmap.x = puyo.xCoord-15;
+        this.bitmap.y = puyo.yCoord-10;
+        stage.addChild(this.bitmap.clone());
+      }
+
     });
 
     stage.update();
@@ -51,11 +61,11 @@ class Board {
     let grid = this.grid;
     grid.forEach((puyo, idx, grid)=>{
       if(!puyo.supported(grid)){
-        puyo.yCoord += 5;
+        puyo.yCoord += 1;
       }
     })
 
-    
+
   }
 
   breakingPuyo(){
@@ -70,15 +80,16 @@ class Board {
         })
       }
     })
+
     for(let i = 0; i < breaking.length; i++){
       breaking[i].adjacentPuyos(this.grid);
       breaking[i].adjacentMatchingPuyo.forEach(puyo3=>{
-        if(breaking.indexOf(puyo3)){
+        if(breaking.indexOf(puyo3) === -1){
           breaking.push(puyo3);
         }
       });
     }
-
+    this.game.score += ((breaking.length+breaking.length/2) * 100);
     return breaking;
   }
 

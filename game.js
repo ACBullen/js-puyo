@@ -5,26 +5,31 @@ class Game {
     this.stage = new createjs.Stage("PuyoField");
 
     this.board = new Board(this);
-    let diamond = new Image();
-    diamond.src = "./singleDiamond.png"
-    let bitmap = new createjs.Bitmap(diamond);
+    this.score = 0;
+
 
     this.board.renderBoard(this.stage);
     createjs.Ticker.addEventListener("tick", this.handleTick.bind(this));
-    Ticker.setFPS(60);
+    createjs.Ticker.setFPS(120);
   }
 
   handleTick(){
 
     this.board.dropPuyo();
     if(this.board.activePuyo.supported(this.board.grid)){
-      if (this.board.puyoQueue.length > 0){
+      let breaking = this.board.breakingPuyo();
+      this.board.grid = this.board.grid.filter(((puyo)=> breaking.indexOf(puyo) === -1))
+      console.log(this.score);
+      if (this.board.puyoQueue.length > 1){
         this.board.activePuyo = this.board.puyoQueue.shift();
-        console.log(this.board.activePuyo);
         this.board.grid.push(this.board.activePuyo)
         this.board.grid.push(this.board.activePuyo.childPuyo);
+      } else {
+        this.board.puyoQueue = this.board.fillQueue(this.board.puyoQueue);
       }
     }
+
+
     this.board.renderBoard(this.stage);
   }
 
