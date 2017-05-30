@@ -1,7 +1,8 @@
 class Puyo {
-  constructor(color, active, breaker, xCoord, yCoord){
+  constructor(color, active, breaker, childPuyo, xCoord, yCoord){
     this.color = color;
     this.active = active;
+    this.childPuyo = childPuyo
     this.xCoord = xCoord;
     this.yCoord = yCoord;
     this.adjacentMatchingPuyo = [];
@@ -52,7 +53,16 @@ class Puyo {
     if ((Math.random() * 2 + 1) > 1){
       breaker = true;
     }
-    return new Puyo(randColor, false, breaker, )
+    let childPuyo = new  Puyo(randColor, false, breaker, null, 120, 20)
+    return new Puyo(randColor, false, breaker, 100, childPuyo, 20)
+  }
 
+  generateBreakerPuyo(){
+    let puyo = generatePuyo();
+    puyo.breaker = true;
+    puyo.childPuyo.breaker = true;
+    return puyo;
   }
 }
+
+export default Puyo;
