@@ -1,12 +1,14 @@
 class Puyo {
-  constructor(color, active, breaker, childPuyo, xCoord, yCoord){
+  constructor(color, active, breaker, childPuyo, xCoord, yCoord, parentPuyo){
     this.color = color;
     this.active = active;
     this.childPuyo = childPuyo
+    this.parentPuyo = parentPuyo
     this.xCoord = xCoord;
     this.yCoord = yCoord;
     this.adjacentMatchingPuyo = [];
     this.breaker = breaker;
+    this.childOrientation = 0;
   }
 
   supported(grid) {
@@ -14,21 +16,39 @@ class Puyo {
 
     if(this.yCoord === 460){
       isSupported = true;
+      if(this.parentPuyo){
+        this.parentPuyo.childPuyo = {};
+      }
+      if(this.childPuyo){
+        this.childPuyo.parentPuyo = {}
+      }
+      this.parentPuyo = {};
+      this.childPuyo = {};
       return isSupported;
     }
 
-    grid.forEach((puyo, idx, grid) => {
+    grid.forEach((puyo) => {
       if (puyo === this.childPuyo){
-        if (puyo.supported(grid) && puyo.xCoord === this.xCoord){
-          isSupported = true;
+        null;
+        } else if(puyo === this.parentPuyo){
+          null;
 
-        }
       } else if ((puyo.yCoord - this.yCoord === 40 && this.yCoord !== puyo.yCoord )&&(this.xCoord === puyo.xCoord)){
-        isSupported = true;
 
+        isSupported = true;
+        if(this.parentPuyo){
+          this.parentPuyo.childPuyo = {};
+        }
+        if (this.childPuyo){
+          this.childPuyo.parentPuyo = {};
+        }
+        this.parentPuyo = {};
+        this.childPuyo = {};
       }
-    })
+  })
+
     return isSupported;
+
   }
 
   isAdjacent(puyo){
@@ -52,14 +72,16 @@ class Puyo {
   }
 
   generatePuyo (){
-    let colors = ["red", "green", "yellow", "red"];
-    let randColor = colors[Math.floor(Math.random() * 4)];
+    let colors = ["red", "green", "yellow", "blue"];
+    let randColor = colors[Math.floor(Math.random() * 4) ];
     let breaker = false;
     if (Math.floor(Math.random() * 4 + 1) > 3){
       breaker = true;
     }
     let childPuyo = new Puyo(randColor, false, breaker, null, 140, 20)
-    return new Puyo(randColor, false, breaker, childPuyo, 100, 20)
+    let parentPuyo = new Puyo(randColor, false, breaker, childPuyo, 100, 20)
+    childPuyo.parentPuyo = parentPuyo;
+    return parentPuyo;
   }
 
   generateBreakerPuyo (){

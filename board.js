@@ -14,14 +14,23 @@ class Board {
     this.activePuyo.xCoord = 100;
     this.activePuyo.yCoord = 20;
 
+    this.handleKeypress = this.handleKeypress.bind(this)
+
     let diamond = new Image();
     diamond.src = "./singleDiamond.png"
     this.bitmap = new createjs.Bitmap(diamond);
-    document.addEventListener("keydown", this.handleKeypress.bind(this));
+    document.addEventListener("keydown", this.handleKeypress);
   }
     handleKeypress(e){
       let activeNewCoord;
       let childNewCoord;
+      let nextMoveIdx;
+      let moveAry = [
+        [this.activePuyo.xCoord + 40, this.activePuyo.yCoord],
+        [this.activePuyo.xCoord, this.activePuyo.yCoord + 42],
+        [this.activePuyo.xCoord - 40, this.activePuyo.yCoord],
+        [this.activePuyo.xCoord, this.activePuyo.yCoord - 42]
+      ];
       if(e.code === "KeyA"){
         activeNewCoord = this.activePuyo.xCoord - 40;
         childNewCoord = this.activePuyo.childPuyo.xCoord - 40;
@@ -37,20 +46,47 @@ class Board {
           this.activePuyo.childPuyo.xCoord = childNewCoord;
         }
       } else if(e.code === "KeyW"){
-        console.log("rotate clockwise");
+        nextMoveIdx = this.activePuyo.childOrientation + 1;
+        if(nextMoveIdx === moveAry.length){
+          nextMoveIdx = 0;
+        }
+        if (this.xValid(moveAry[nextMoveIdx][0], moveAry[nextMoveIdx][1]) && this.yValid(moveAry[nextMoveIdx][1], moveAry[nextMoveIdx][0])){
+          this.activePuyo.childOrientation = nextMoveIdx;
+          this.activePuyo.childPuyo.xCoord = moveAry[nextMoveIdx][0];
+          this.activePuyo.childPuyo.yCoord = moveAry[nextMoveIdx][1];
+        }
       } else if(e.code === "KeyS"){
-        console.log("rotate counterclockwise");
+        nextMoveIdx = this.activePuyo.childOrientation - 1;
+        if(nextMoveIdx < 0){
+          nextMoveIdx = moveAry.length - 1
+        }
+        if (this.xValid(moveAry[nextMoveIdx][0], moveAry[nextMoveIdx][1]) && this.yValid(moveAry[nextMoveIdx][1], moveAry[nextMoveIdx][0])){
+          this.activePuyo.childOrientation = nextMoveIdx;
+          this.activePuyo.childPuyo.xCoord = moveAry[nextMoveIdx][0];
+          this.activePuyo.childPuyo.yCoord = moveAry[nextMoveIdx][1];
+        }
       }
     }
     xValid(newCoord, curHeight){
       if(newCoord < 20 || newCoord > 220){
-        console.log("invalid on bounds");
+        console.log("invalid: beyond x borders");
         return false
       } else if (this.grid.some(puyo=> (
         (puyo.xCoord === newCoord && Math.abs(puyo.yCoord - curHeight) < 20) && (
           puyo !== this.activePuyo && puyo !== this.activePuyo.childPuyo
         )))) {
-        console.log("invalid on collision");
+          console.log("invalid: collision");
+        return false
+      }
+      return true
+    }
+
+    yValid(newCoord, curWidth){
+      if (newCoord < 20){
+        return false
+      } else if(this.grid.some((puyo)=>((Math.abs(newCoord - puyo.yCoord) < 40 && (puyo.xCoord === curWidth))
+    ))){
+      debugger;
         return false
       }
       return true
@@ -71,7 +107,6 @@ class Board {
     } else {
       newQueue.push(this.basePuyo.generateBreakerPuyo());
     }
-
     return newQueue;
   }
 
@@ -81,15 +116,14 @@ class Board {
 
       let circle = new createjs.Shape();
       stage.addChild(circle);
-      circle.graphics.beginFill(puyo.color).drawCircle(puyo.xCoord,puyo.yCoord,20);
+      circle.graphics.beginFill("white").drawCircle(puyo.xCoord, puyo.yCoord, 20);
+      circle.graphics.beginFill(puyo.color).drawCircle(puyo.xCoord,puyo.yCoord,19);
       if (puyo.breaker){
         this.bitmap.x = puyo.xCoord-15;
         this.bitmap.y = puyo.yCoord-10;
         stage.addChild(this.bitmap.clone());
       }
-
     });
-
     stage.update();
   }
 
@@ -100,8 +134,6 @@ class Board {
         puyo.yCoord += 2;
       }
     })
-
-
   }
 
   breakingPuyo(){
@@ -128,8 +160,6 @@ class Board {
     this.game.score += ((breaking.length+breaking.length/2) * 100);
     return breaking;
   }
-
-
 }
 
 export default Board;
