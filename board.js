@@ -14,11 +14,10 @@ class Board {
     this.activePuyo.xCoord = 100;
     this.activePuyo.yCoord = 20;
 
+    this.game.handleNewNext(this.puyoQueue[0]);
+
     this.handleKeypress = this.handleKeypress.bind(this)
 
-    let diamond = new Image();
-    diamond.src = "./singleDiamond.png"
-    this.bitmap = new createjs.Bitmap(diamond);
     document.addEventListener("keydown", this.handleKeypress);
   }
     handleKeypress(e){
@@ -119,9 +118,9 @@ class Board {
       circle.graphics.beginFill("black").drawCircle(puyo.xCoord, puyo.yCoord, 20);
       circle.graphics.beginFill(puyo.color).drawCircle(puyo.xCoord,puyo.yCoord,19);
       if (puyo.breaker){
-        this.bitmap.x = puyo.xCoord-15;
-        this.bitmap.y = puyo.yCoord-10;
-        stage.addChild(this.bitmap.clone());
+        this.game.bitmap.x = puyo.xCoord-15;
+        this.game.bitmap.y = puyo.yCoord-10;
+        stage.addChild(this.game.bitmap.clone());
       }
     });
     stage.update();
