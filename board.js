@@ -17,8 +17,44 @@ class Board {
     let diamond = new Image();
     diamond.src = "./singleDiamond.png"
     this.bitmap = new createjs.Bitmap(diamond);
-
+    document.addEventListener("keydown", this.handleKeypress.bind(this));
   }
+    handleKeypress(e){
+      let activeNewCoord;
+      let childNewCoord;
+      if(e.code === "KeyA"){
+        activeNewCoord = this.activePuyo.xCoord - 40;
+        childNewCoord = this.activePuyo.childPuyo.xCoord - 40;
+        if (this.xValid(activeNewCoord, this.activePuyo.yCoord) && this.xValid(childNewCoord, this.activePuyo.childPuyo.yCoord)){
+          this.activePuyo.xCoord = activeNewCoord;
+          this.activePuyo.childPuyo.xCoord = childNewCoord;
+        }
+      } else if(e.code === "KeyD"){
+        activeNewCoord = this.activePuyo.xCoord + 40;
+        childNewCoord = this.activePuyo.childPuyo.xCoord + 40;
+        if (this.xValid(activeNewCoord, this.activePuyo.yCoord) && this.xValid(childNewCoord, this.activePuyo.childPuyo.yCoord)){
+          this.activePuyo.xCoord = activeNewCoord;
+          this.activePuyo.childPuyo.xCoord = childNewCoord;
+        }
+      } else if(e.code === "KeyW"){
+        console.log("rotate clockwise");
+      } else if(e.code === "KeyS"){
+        console.log("rotate counterclockwise");
+      }
+    }
+    xValid(newCoord, curHeight){
+      if(newCoord < 20 || newCoord > 220){
+        console.log("invalid on bounds");
+        return false
+      } else if (this.grid.some(puyo=> (
+        (puyo.xCoord === newCoord && Math.abs(puyo.yCoord - curHeight) < 20) && (
+          puyo !== this.activePuyo && puyo !== this.activePuyo.childPuyo
+        )))) {
+        console.log("invalid on collision");
+        return false
+      }
+      return true
+    }
 
   fillQueue(remnant){
     let breakerPresent = false;
@@ -61,7 +97,7 @@ class Board {
     let grid = this.grid;
     grid.forEach((puyo, idx, grid)=>{
       if(!puyo.supported(grid)){
-        puyo.yCoord += 1;
+        puyo.yCoord += 2;
       }
     })
 
