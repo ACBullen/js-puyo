@@ -44,5 +44,19 @@ body {
   border: 1px solid black;
   border-radius: 3px;
   z-index: 3;
+  padding: 10px;
   text-align: center
+}
+
+#GameOver {
+  position: absolute;
+  top: 125px;
+  display: none;
+  width: 30%;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 3px;
+  z-index: 4;
+  text-align: center;
+  padding: 10px;
 }

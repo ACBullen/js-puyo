@@ -94,6 +94,7 @@ class Game {
         if (this.board.activePuyo.supported(this.board.grid) && this.board.activePuyo.yCoord === 20){
           createjs.Ticker.removeEventListener("tick", this.handleTick);
           document.removeEventListener('keydown', this.board.handleKeypress);
+          document.getElementById("GameOver").style.display = "inline-block";
         } else {
           this.board.activePuyo = this.board.puyoQueue.shift();
           this.board.grid.push(this.board.activePuyo)
