@@ -6,7 +6,8 @@ class Game {
 
     this.board = new Board(this);
     this.score = 0;
-
+    this.gameTime = 0;
+    this.timeString = "0:00"
 
     this.board.renderBoard(this.stage);
     this.handleTick = this.handleTick.bind(this);
@@ -14,7 +15,37 @@ class Game {
     createjs.Ticker.setFPS(120);
   }
 
+  handleTimeUpdate(){
+    let msTime =  Math.floor(createjs.Ticker.getTime() / 1000);
+    if (this.gameTime < msTime){
+      this.gameTime = msTime;
+      this.timeString = this.buildTimeString(this.gameTime);
+      console.log(this.timeString);
+    }
+  }
+
+  buildTimeString(secTime){
+    let seconds = secTime % 60;
+    let minutes = Math.floor(secTime / 60);
+    let secString;
+    let minString;
+    if (seconds < 10){
+      secString = `0${seconds}`
+    } else {
+      secString = `${seconds}`
+    }
+    minString = `${minutes}`
+
+    return `${minString}:${secString}`
+  }
+
+
   handleTick(){
+    this.handleTimeUpdate();
+    let timer = document.getElementById("timer");
+    let timeString = document.createTextNode(`${this.timeString}`);
+    timer.innerHTML = '';
+    timer.appendChild(timeString);
     if(!createjs.Ticker.pause){
       this.board.dropPuyo();
       if(this.board.activePuyo.supported(this.board.grid) || this.board.activePuyo.childPuyo.xCoord === undefined){
@@ -35,9 +66,8 @@ class Game {
       }
       this.board.renderBoard(this.stage);
     } else {
-      console.log(this.score);
-    }
 
+    }
   }
 
 }

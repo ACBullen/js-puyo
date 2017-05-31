@@ -53,7 +53,9 @@ class Puyo {
 
   isAdjacent(puyo){
     let adj = false;
-    if((Math.abs(puyo.yCoord - this.yCoord) < 41 && this.yCoord !== puyo.yCoord) || (Math.abs(this.xCoord - puyo.yCoord) < 41 && this.xCoord !== puyo.x)){
+    if(((Math.abs(puyo.yCoord - this.yCoord) < 41 && this.yCoord !== puyo.yCoord) && puyo.xCoord === this.xCoord
+      )||(
+       (Math.abs(puyo.xCoord - this.xCoord) < 41 && this.xCoord !== puyo.xCoord) && puyo.yCoord === this.yCoord)){
       adj = true;
     }
     return adj;

@@ -84,7 +84,7 @@ class Board {
     yValid(newCoord, curWidth){
       if (newCoord < 20){
         return false
-      } else if(this.grid.some((puyo)=>((Math.abs(newCoord - puyo.yCoord) < 40 && (puyo.xCoord === curWidth))
+      } else if(this.grid.some((puyo)=>((Math.abs(newCoord - puyo.yCoord) < 41 && (puyo.xCoord === curWidth))
     ))){
       debugger;
         return false
@@ -116,7 +116,7 @@ class Board {
 
       let circle = new createjs.Shape();
       stage.addChild(circle);
-      circle.graphics.beginFill("white").drawCircle(puyo.xCoord, puyo.yCoord, 20);
+      circle.graphics.beginFill("black").drawCircle(puyo.xCoord, puyo.yCoord, 20);
       circle.graphics.beginFill(puyo.color).drawCircle(puyo.xCoord,puyo.yCoord,19);
       if (puyo.breaker){
         this.bitmap.x = puyo.xCoord-15;
@@ -139,7 +139,7 @@ class Board {
   breakingPuyo(){
     let breaking = [];
     this.grid.forEach((puyo, idx, grid)=>{
-      if (puyo.supported && puyo.breaker) {
+      if (puyo.supported(grid) && puyo.breaker){
         puyo.adjacentPuyos(grid);
         puyo.adjacentMatchingPuyo.forEach((puyo2)=>{
           if(breaking.indexOf(puyo2) === -1){
@@ -158,6 +158,10 @@ class Board {
       });
     }
     this.game.score += ((breaking.length+breaking.length/2) * 100);
+    let scoreBoard = document.getElementById("scoreBoard");
+    let scoreString = document.createTextNode(`${this.game.score}`);
+    scoreBoard.innerHTML = '';
+    scoreBoard.appendChild(scoreString);
     return breaking;
   }
 }

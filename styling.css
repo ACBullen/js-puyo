@@ -1,7 +1,7 @@
 #PuyoField {
-  border: 1px solid gray;
-  background: black;
-}
-body{
+  border: 1px solid black;
 
+}
+body {
+  font-family: 'VT323', monospace;
 }
