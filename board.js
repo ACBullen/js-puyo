@@ -17,6 +17,8 @@ class Board {
     this.grid.push(this.activePuyo.childPuyo);
     this.activePuyo.xCoord = 100;
     this.activePuyo.yCoord = 20;
+    this.activePuyo.childPuyo.xCoord = 140;
+    this.activePuyo.childPuyo.yCoord = 20;
 
     this.game.handleNewNext(this.puyoQueue[0]);
 
