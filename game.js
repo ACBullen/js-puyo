@@ -9,6 +9,12 @@ class Game {
     this.score = 0;
     this.gameTime = 0;
     this.timeString = "0:00"
+    this.initialTime = createjs.Ticker.getTime() || 0;
+
+    let scoreBoard = document.getElementById("scoreBoard");
+    let scoreString = document.createTextNode(`${this.score}`);
+    scoreBoard.innerHTML = '';
+    scoreBoard.appendChild(scoreString);
 
     let diamond = new Image();
     diamond.src = "./singleDiamond.png"
@@ -21,7 +27,7 @@ class Game {
   }
 
   handleTimeUpdate(){
-    let msTime =  Math.floor(createjs.Ticker.getTime() / 1000);
+    let msTime =  Math.floor(createjs.Ticker.getTime() / 1000) - this.initialTime;
     if (this.gameTime < msTime){
       this.gameTime = msTime;
       this.timeString = this.buildTimeString(this.gameTime);
