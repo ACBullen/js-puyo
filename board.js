@@ -9,12 +9,18 @@ class Board {
     //holds the next several puyo blocks to be dropped
     this.puyoQueue = this.fillQueue();
     this.activePuyo = this.puyoQueue.shift();
+    this.activePuyo.breaker = false;
+    this.activePuyo.childPuyo.breaker = false;
+    this.puyoQueue[0].breaker = false;
+    this.puyoQueue[0].childPuyo.breaker = false;
     this.grid.push(this.activePuyo);
     this.grid.push(this.activePuyo.childPuyo);
     this.activePuyo.xCoord = 100;
     this.activePuyo.yCoord = 20;
 
     this.game.handleNewNext(this.puyoQueue[0]);
+
+    this.bitmap = this.game.bitmap;
 
     this.handleKeypress = this.handleKeypress.bind(this)
 
@@ -68,13 +74,11 @@ class Board {
     }
     xValid(newCoord, curHeight){
       if(newCoord < 20 || newCoord > 220){
-        console.log("invalid: beyond x borders");
         return false
       } else if (this.grid.some(puyo=> (
         (puyo.xCoord === newCoord && Math.abs(puyo.yCoord - curHeight) < 20) && (
           puyo !== this.activePuyo && puyo !== this.activePuyo.childPuyo
         )))) {
-          console.log("invalid: collision");
         return false
       }
       return true
@@ -83,9 +87,8 @@ class Board {
     yValid(newCoord, curWidth){
       if (newCoord < 20){
         return false
-      } else if(this.grid.some((puyo)=>((Math.abs(newCoord - puyo.yCoord) < 41 && (puyo.xCoord === curWidth))
+      } else if(this.grid.some((puyo)=>((Math.abs(newCoord - puyo.yCoord) < 41 && Math.abs(puyo.xCoord - curWidth) === 0)
     ))){
-      debugger;
         return false
       }
       return true
@@ -116,7 +119,7 @@ class Board {
       let circle = new createjs.Shape();
       stage.addChild(circle);
       circle.graphics.beginFill("black").drawCircle(puyo.xCoord, puyo.yCoord, 20);
-      circle.graphics.beginFill(puyo.color).drawCircle(puyo.xCoord,puyo.yCoord,19);
+      circle.graphics.beginFill(puyo.color).drawCircle(puyo.xCoord,puyo.yCoord,18);
       if (puyo.breaker){
         this.game.bitmap.x = puyo.xCoord-15;
         this.game.bitmap.y = puyo.yCoord-10;

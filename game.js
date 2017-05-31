@@ -50,21 +50,21 @@ class Game {
     let childPuyo = puyo.childPuyo;
     let circle = new createjs.Shape();
     this.upNext.addChild(circle);
-    circle.graphics.beginFill("black").drawCircle(20, 20, 20);
-    circle.graphics.beginFill(puyo.color).drawCircle(20, 20, 19);
+    circle.graphics.beginFill("black").drawCircle(30, 30, 20);
+    circle.graphics.beginFill(puyo.color).drawCircle(30, 30, 18);
     if (puyo.breaker){
-      this.bitmap.x = 5;
-      this.bitmap.y = 10;
+      this.bitmap.x = 15;
+      this.bitmap.y = 20;
       this.upNext.addChild(this.bitmap.clone());
     }
 
     let childCircle = new createjs.Shape();
     this.upNext.addChild(childCircle);
-    childCircle.graphics.beginFill('black').drawCircle(60, 20, 20);
-    childCircle.graphics.beginFill(childPuyo.color).drawCircle(60, 20, 19);
+    childCircle.graphics.beginFill('black').drawCircle(70, 30, 20);
+    childCircle.graphics.beginFill(childPuyo.color).drawCircle(70, 30, 18);
     if (childPuyo.breaker){
-      this.bitmap.x = 45;
-      this.bitmap.y = 10;
+      this.bitmap.x = 55;
+      this.bitmap.y = 20;
       this.upNext.addChild(this.bitmap.clone());
     }
     this.upNext.update();
