@@ -9,6 +9,23 @@ body {
   flex-direction: column;
   align-items: center;
 }
+
+button {
+  font-family: 'VT323', monospace;
+  font-size: 18px;
+  padding: 5px;
+  border-top: 2px solid lightgray;
+  border-left: 2px solid lightgray;
+  border-right: 2px solid gray;
+  border-bottom: 2px solid gray;
+}
+
+button:hover {
+  cursor: pointer;
+  color: white;
+  background-color: black;
+  padding: 5px;
+}
 .gameConcerns{
   display: flex;
   flex-direction: row;
