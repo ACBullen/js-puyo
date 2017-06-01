@@ -33,7 +33,8 @@ class Puyo {
         } else if(puyo === this.parentPuyo){
           null;
 
-      } else if ((puyo.yCoord - this.yCoord < 41 && puyo.yCoord - this.yCoord > 0 && this.yCoord !== puyo.yCoord )&&(this.xCoord === puyo.xCoord)){
+      } else if ((puyo.yCoord - this.yCoord < 41 && puyo.yCoord - this.yCoord > 0 && this.yCoord !== puyo.yCoord
+        )&&(this.xCoord === puyo.xCoord)){
 
         isSupported = true;
         if(this.parentPuyo){
@@ -63,7 +64,7 @@ class Puyo {
 
   adjacentPuyos(grid){
     grid.forEach((puyo)=>{
-      if (this.isAdjacent(puyo) && this.color === puyo.color){
+      if (this.isAdjacent(puyo) && this.color === puyo.color && puyo.supported(grid)){
         this.adjacentMatchingPuyo.push(puyo);
       } else if(this.adjacentMatchingPuyo.indexOf(puyo) > -1) {
         this.adjacentMatchingPuyo = this.adjacentMatchingPuyo.slice(0, this.adjacentMatchingPuyo.indexOf(puyo)).concat(

@@ -84,9 +84,10 @@ class Game {
 
     this.board.advanceChildToTarget();
     this.board.dropPuyo();
+    let breaking = this.board.breakingPuyo();
+    this.board.grid = this.board.grid.filter(((puyo)=> breaking.indexOf(puyo) === -1))
     if(this.board.activePuyo.supported(this.board.grid) || this.board.activePuyo.childPuyo.xCoord === undefined){
-      let breaking = this.board.breakingPuyo();
-      this.board.grid = this.board.grid.filter(((puyo)=> breaking.indexOf(puyo) === -1))
+
       if (this.board.puyoQueue.length <= 1){
         this.board.puyoQueue = this.board.fillQueue(this.board.puyoQueue);
       }
