@@ -220,35 +220,35 @@ class Board {
       if (active.childOrientation === 0 || active.childOrientation === 2){
         if (child.xCoord !== moveAry[active.childOrientation][0]){
           if ((child.xCoord - moveAry[active.childOrientation][0]) < 0){
-            child.xCoord += 8;
+            child.xCoord += 20;
           } else {
-            child.xCoord -= 8;
+            child.xCoord -= 20;
           }
         } else {
           if((child.yCoord - moveAry[active.childOrientation][1]) < 0){
-            child.yCoord += 7
+            child.yCoord += 21
             if (child.yCoord > 453){
               child.yCoord = 453;
             }
           } else {
-            child.yCoord -= 7
+            child.yCoord -= 21
           }
         }
       } else {
         if(child.yCoord !== moveAry[active.childOrientation][1]){
           if ((child.yCoord - moveAry[active.childOrientation][1]) < 0){
-            child.yCoord += 7;
-            if (child.yCoord > 458){
-              child.yCoord = 458;
+            child.yCoord += 21;
+            if (child.yCoord > 450){
+              child.yCoord = 450;
             }
           } else {
-            child.yCoord -= 7;
+            child.yCoord -= 21;
           }
         } else {
           if ((child.xCoord - moveAry[active.childOrientation][0]) < 0){
-            child.xCoord += 8;
+            child.xCoord += 20;
           } else {
-            child.xCoord -= 8;
+            child.xCoord -= 20;
           }
         }
       }
@@ -267,10 +267,10 @@ class Board {
       }
       if(!puyo.supported(grid)){
         if(puyo === this.activePuyo){
-          puyo.yCoord += 2;
-          puyo.childPuyo.yCoord += 2;
+          puyo.yCoord += 5;
+          puyo.childPuyo.yCoord += 5;
         } else if (puyo.parentPuyo !== this.activePuyo) {
-            puyo.yCoord += 2;
+            puyo.yCoord += 5;
         }
       }
       if (puyo.yCoord > 460){
@@ -455,7 +455,7 @@ class Game {
     this.board.renderBoard(this.stage);
     this.handleTick = this.handleTick.bind(this);
     createjs.Ticker.addEventListener("tick", this.handleTick);
-    createjs.Ticker.setFPS(120);
+    createjs.Ticker.setFPS(30);
   }
 
   handleTimeUpdate(){

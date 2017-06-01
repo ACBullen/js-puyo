@@ -23,7 +23,7 @@ class Game {
     this.board.renderBoard(this.stage);
     this.handleTick = this.handleTick.bind(this);
     createjs.Ticker.addEventListener("tick", this.handleTick);
-    createjs.Ticker.setFPS(120);
+    createjs.Ticker.setFPS(30);
   }
 
   handleTimeUpdate(){
