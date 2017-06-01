@@ -199,6 +199,9 @@ class Board {
             puyo.yCoord += 2;
         }
       }
+      if (puyo.yCoord > 460){
+        puyo.yCoord = 460;
+      }
     })
   }
 
