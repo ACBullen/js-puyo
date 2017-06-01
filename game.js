@@ -82,7 +82,7 @@ class Game {
     timer.innerHTML = '';
     timer.appendChild(timeString);
 
-
+    this.board.advanceChildToTarget();
     this.board.dropPuyo();
     if(this.board.activePuyo.supported(this.board.grid) || this.board.activePuyo.childPuyo.xCoord === undefined){
       let breaking = this.board.breakingPuyo();
@@ -90,7 +90,7 @@ class Game {
       if (this.board.puyoQueue.length <= 1){
         this.board.puyoQueue = this.board.fillQueue(this.board.puyoQueue);
       }
-      if (this.board.activePuyo.supported(this.board.grid) && this.board.activePuyo.yCoord === 20){
+      if (this.board.activePuyo.supported(this.board.grid) && this.board.activePuyo.yCoord <= 20){
         createjs.Ticker.removeEventListener("tick", this.handleTick);
         document.removeEventListener('keydown', this.board.handleKeypress);
         document.getElementById("GameOver").style.display = "inline-block";

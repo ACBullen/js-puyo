@@ -38,39 +38,39 @@ class Board {
         [this.activePuyo.xCoord - 40, this.activePuyo.yCoord],
         [this.activePuyo.xCoord, this.activePuyo.yCoord - 42]
       ];
-      if(e.code === "KeyA"){
-        activeNewCoord = this.activePuyo.xCoord - 40;
-        childNewCoord = this.activePuyo.childPuyo.xCoord - 40;
-        if (this.xValid(activeNewCoord, this.activePuyo.yCoord) && this.xValid(childNewCoord, this.activePuyo.childPuyo.yCoord)){
-          this.activePuyo.xCoord = activeNewCoord;
-          this.activePuyo.childPuyo.xCoord = childNewCoord;
-        }
-      } else if(e.code === "KeyD"){
-        activeNewCoord = this.activePuyo.xCoord + 40;
-        childNewCoord = this.activePuyo.childPuyo.xCoord + 40;
-        if (this.xValid(activeNewCoord, this.activePuyo.yCoord) && this.xValid(childNewCoord, this.activePuyo.childPuyo.yCoord)){
-          this.activePuyo.xCoord = activeNewCoord;
-          this.activePuyo.childPuyo.xCoord = childNewCoord;
-        }
-      } else if(e.code === "KeyW"){
-        nextMoveIdx = this.activePuyo.childOrientation + 1;
-        if(nextMoveIdx === moveAry.length){
-          nextMoveIdx = 0;
-        }
-        if (this.xValid(moveAry[nextMoveIdx][0], moveAry[nextMoveIdx][1]) && this.yValid(moveAry[nextMoveIdx][1], moveAry[nextMoveIdx][0])){
-          this.activePuyo.childOrientation = nextMoveIdx;
-          this.activePuyo.childPuyo.xCoord = moveAry[nextMoveIdx][0];
-          this.activePuyo.childPuyo.yCoord = moveAry[nextMoveIdx][1];
-        }
-      } else if(e.code === "KeyS"){
-        nextMoveIdx = this.activePuyo.childOrientation - 1;
-        if(nextMoveIdx < 0){
-          nextMoveIdx = moveAry.length - 1
-        }
-        if (this.xValid(moveAry[nextMoveIdx][0], moveAry[nextMoveIdx][1]) && this.yValid(moveAry[nextMoveIdx][1], moveAry[nextMoveIdx][0])){
-          this.activePuyo.childOrientation = nextMoveIdx;
-          this.activePuyo.childPuyo.xCoord = moveAry[nextMoveIdx][0];
-          this.activePuyo.childPuyo.yCoord = moveAry[nextMoveIdx][1];
+      if ((this.activePuyo.childPuyo.xCoord === moveAry[this.activePuyo.childOrientation][0]
+        )&& (
+          this.activePuyo.childPuyo.yCoord === moveAry[this.activePuyo.childOrientation][1])){
+        if(e.code === "KeyA"){
+          activeNewCoord = this.activePuyo.xCoord - 40;
+          childNewCoord = this.activePuyo.childPuyo.xCoord - 40;
+          if (this.xValid(activeNewCoord, this.activePuyo.yCoord) && this.xValid(childNewCoord, this.activePuyo.childPuyo.yCoord)){
+            this.activePuyo.xCoord = activeNewCoord;
+            this.activePuyo.childPuyo.xCoord = childNewCoord;
+          }
+        } else if(e.code === "KeyD"){
+          activeNewCoord = this.activePuyo.xCoord + 40;
+          childNewCoord = this.activePuyo.childPuyo.xCoord + 40;
+          if (this.xValid(activeNewCoord, this.activePuyo.yCoord) && this.xValid(childNewCoord, this.activePuyo.childPuyo.yCoord)){
+            this.activePuyo.xCoord = activeNewCoord;
+            this.activePuyo.childPuyo.xCoord = childNewCoord;
+          }
+        } else if(e.code === "KeyW"){
+          nextMoveIdx = this.activePuyo.childOrientation + 1;
+          if(nextMoveIdx === moveAry.length){
+            nextMoveIdx = 0;
+          }
+          if (this.xValid(moveAry[nextMoveIdx][0], moveAry[nextMoveIdx][1]) && this.yValid(moveAry[nextMoveIdx][1], moveAry[nextMoveIdx][0])){
+            this.activePuyo.childOrientation = nextMoveIdx;
+          }
+        } else if(e.code === "KeyS"){
+          nextMoveIdx = this.activePuyo.childOrientation - 1;
+          if(nextMoveIdx < 0){
+            nextMoveIdx = moveAry.length - 1
+          }
+          if (this.xValid(moveAry[nextMoveIdx][0], moveAry[nextMoveIdx][1]) && this.yValid(moveAry[nextMoveIdx][1], moveAry[nextMoveIdx][0])){
+            this.activePuyo.childOrientation = nextMoveIdx;
+          }
         }
       }
     }
@@ -131,11 +131,73 @@ class Board {
     stage.update();
   }
 
+  advanceChildToTarget(){
+    let child = this.activePuyo.childPuyo;
+    let active = this.activePuyo;
+    let moveAry = [
+      [active.xCoord + 40, active.yCoord],
+      [active.xCoord, active.yCoord + 42],
+      [active.xCoord - 40, active.yCoord],
+      [active.xCoord, active.yCoord - 42]
+    ];
+
+
+    if (child.xCoord !== moveAry[active.childOrientation][0] || child.yCoord !== moveAry[active.childOrientation][1]){
+      if (active.childOrientation === 0 || active.childOrientation === 2){
+        if (child.xCoord !== moveAry[active.childOrientation][0]){
+          if ((child.xCoord - moveAry[active.childOrientation][0]) < 0){
+            child.xCoord += 8;
+          } else {
+            child.xCoord -= 8;
+          }
+        } else {
+          if((child.yCoord - moveAry[active.childOrientation][1]) < 0){
+            child.yCoord += 7
+            if (child.yCoord > 458){
+              child.yCoord = 458;
+            }
+          } else {
+            child.yCoord -= 7
+          }
+        }
+      } else {
+        if(child.yCoord !== moveAry[active.childOrientation][1]){
+          if ((child.yCoord - moveAry[active.childOrientation][1]) < 0){
+            child.yCoord += 7;
+            if (child.yCoord > 458){
+              child.yCoord = 458;
+            }
+          } else {
+            child.yCoord -= 7;
+          }
+        } else {
+          if ((child.xCoord - moveAry[active.childOrientation][0]) < 0){
+            child.xCoord += 8;
+          } else {
+            child.xCoord -= 8;
+          }
+        }
+      }
+    }
+  }
+
   dropPuyo(){
     let grid = this.grid;
     grid.forEach((puyo, idx, grid)=>{
+      if (((puyo.xCoord - 20) % 40 !== 0) && puyo.parentPuyo.xCoord === undefined){
+        if ((puyo.xCoord) - 20 % 40 < 20){
+          puyo.xCoord = puyo.xCoord - ((puyo.xCoord - 20) % 40);
+        } else {
+          puyo.xCoord = puyo.xCoord + (40 - ((puyo.xCoord - 20) % 40));
+        }
+      }
       if(!puyo.supported(grid)){
-        puyo.yCoord += 2;
+        if(puyo === this.activePuyo){
+          puyo.yCoord += 2;
+          puyo.childPuyo.yCoord += 2;
+        } else if (puyo.parentPuyo !== this.activePuyo) {
+            puyo.yCoord += 2;
+        }
       }
     })
   }
