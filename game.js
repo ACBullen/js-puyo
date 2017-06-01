@@ -50,9 +50,7 @@ class Game {
   }
 
   handleNewNext(puyo){
-    console.log("hit");
     this.upNext.removeAllChildren();
-    console.log(puyo);
     let childPuyo = puyo.childPuyo;
     let circle = new createjs.Shape();
     this.upNext.addChild(circle);

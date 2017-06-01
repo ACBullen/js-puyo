@@ -8,6 +8,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: yellowgreen;
+  background-color: black;
 }
 
 button {
@@ -32,6 +34,9 @@ button:hover {
   justify-content: center;
   width:75%;
 }
+canvas {
+  background-color: white;
+}
 #infoPanel {
   display: flex;
   flex-direction: column;
@@ -39,9 +44,12 @@ button:hover {
 }
 
 #infoPanel div {
-  border: 1px solid black;
+  border: 1px solid gray;
   text-align: center;
-  border-radius: 3px
+  border-radius: 3px;
+  background-color: white;
+  font-size: 18px;
+  color: black;
 }
 
 #infoPanel h4 {
@@ -52,17 +60,20 @@ button:hover {
 #title {
   display: inline-block;
 }
+
 #welcome {
   position: absolute;
   top: 125px;
   display: inline-block;
   width: 30%;
   background-color: white;
-  border: 1px solid black;
+  border: 1px solid gray;
   border-radius: 3px;
+  font-size: 20px;
   z-index: 3;
   padding: 10px;
-  text-align: center
+  text-align: center;
+  color: black;
 }
 
 #GameOver {
@@ -71,9 +82,10 @@ button:hover {
   display: none;
   width: 30%;
   background-color: white;
-  border: 1px solid black;
+  border: 1px solid grey;
   border-radius: 3px;
   z-index: 4;
   text-align: center;
   padding: 10px;
+  color:black;
 }

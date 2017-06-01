@@ -80,7 +80,14 @@ class Puyo {
     if (Math.floor(Math.random() * 4 + 1) > 3){
       breaker = true;
     }
-    let childPuyo = new Puyo(randColor, false, breaker, null, 140, -20)
+    let randColor2;
+    if ((Math.random() *100) > 74){
+      randColor2 = colors[Math.floor(Math.random() * 4) ];
+    } else {
+      randColor2 = randColor;
+    }
+
+    let childPuyo = new Puyo(randColor2, false, breaker, null, 140, -20)
     let parentPuyo = new Puyo(randColor, false, breaker, childPuyo, 100, -20)
     childPuyo.parentPuyo = parentPuyo;
     return parentPuyo;
