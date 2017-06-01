@@ -78,7 +78,7 @@ class Board {
       if(newCoord < 20 || newCoord > 220){
         return false
       } else if (this.grid.some(puyo=> (
-        (puyo.xCoord === newCoord && Math.abs(puyo.yCoord - curHeight) < 20) && (
+        (puyo.xCoord === newCoord && Math.abs(puyo.yCoord - curHeight) < 35) && (
           puyo !== this.activePuyo && puyo !== this.activePuyo.childPuyo
         )))) {
         return false
@@ -89,7 +89,7 @@ class Board {
     yValid(newCoord, curWidth){
       if (newCoord < 20){
         return false
-      } else if(this.grid.some((puyo)=>((Math.abs(newCoord - puyo.yCoord) < 41 && Math.abs(puyo.xCoord - curWidth) === 0)
+      } else if(this.grid.some((puyo)=>((Math.abs(newCoord - puyo.yCoord) < 41 && Math.abs(puyo.xCoord - curWidth) < 35)
     ))){
         return false
       }
