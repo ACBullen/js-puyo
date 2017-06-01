@@ -40,10 +40,10 @@ access and interact with the canvas.
 
 ### File Structure
 
-- board.js: Renders board, tracks filled tiles, holds block queue.
+- board.js: Renders board, tracks filled tiles, holds block queue, input logic.
 - puyo.js: holds logic for generating blocks, class information for color,
 breaker status, active or not.
-- game.js: Holds input logic, scoring logic, game-over check.
+- game.js: Holds scoring logic, game-over check.
 
 ## Implementation Plan
 
