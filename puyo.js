@@ -33,7 +33,7 @@ class Puyo {
         } else if(puyo === this.parentPuyo){
           null;
 
-      } else if ((puyo.yCoord - this.yCoord < 41 && this.yCoord !== puyo.yCoord )&&(this.xCoord === puyo.xCoord)){
+      } else if ((puyo.yCoord - this.yCoord < 41 && puyo.yCoord - this.yCoord > 0 && this.yCoord !== puyo.yCoord )&&(this.xCoord === puyo.xCoord)){
 
         isSupported = true;
         if(this.parentPuyo){
