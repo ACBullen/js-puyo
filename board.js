@@ -153,8 +153,8 @@ class Board {
         } else {
           if((child.yCoord - moveAry[active.childOrientation][1]) < 0){
             child.yCoord += 7
-            if (child.yCoord > 458){
-              child.yCoord = 458;
+            if (child.yCoord > 453){
+              child.yCoord = 453;
             }
           } else {
             child.yCoord -= 7
