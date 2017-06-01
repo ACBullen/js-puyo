@@ -9,7 +9,7 @@ class Game {
     this.score = 0;
     this.gameTime = 0;
     this.timeString = "0:00"
-    this.initialTime = createjs.Ticker.getTime() || 0;
+    this.initialTime = Math.floor(createjs.Ticker.getTime()/1000)|| 0;
 
     let scoreBoard = document.getElementById("scoreBoard");
     let scoreString = document.createTextNode(`${this.score}`);
@@ -92,6 +92,7 @@ class Game {
         this.board.puyoQueue = this.board.fillQueue(this.board.puyoQueue);
       }
       if (this.board.activePuyo.supported(this.board.grid) && this.board.activePuyo.yCoord <= 20){
+        this.gameTime = 0;
         createjs.Ticker.removeEventListener("tick", this.handleTick);
         document.removeEventListener('keydown', this.board.handleKeypress);
         document.getElementById("GameOver").style.display = "inline-block";
