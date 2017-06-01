@@ -449,7 +449,7 @@ class Game {
     scoreBoard.appendChild(scoreString);
 
     let diamond = new Image();
-    diamond.src = "./singleDiamond.png"
+    diamond.src = "./assets/singleDiamond.png"
     this.bitmap = new createjs.Bitmap(diamond);
 
     this.board.renderBoard(this.stage);
