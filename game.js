@@ -81,28 +81,28 @@ class Game {
     let timeString = document.createTextNode(`${this.timeString}`);
     timer.innerHTML = '';
     timer.appendChild(timeString);
-    if(!createjs.Ticker.pause){
-      this.board.dropPuyo();
-      if(this.board.activePuyo.supported(this.board.grid) || this.board.activePuyo.childPuyo.xCoord === undefined){
-        let breaking = this.board.breakingPuyo();
-        this.board.grid = this.board.grid.filter(((puyo)=> breaking.indexOf(puyo) === -1))
-        if (this.board.puyoQueue.length <= 1){
-          this.board.puyoQueue = this.board.fillQueue(this.board.puyoQueue);
-        }
-        if (this.board.activePuyo.supported(this.board.grid) && this.board.activePuyo.yCoord === 20){
-          createjs.Ticker.removeEventListener("tick", this.handleTick);
-          document.removeEventListener('keydown', this.board.handleKeypress);
-          document.getElementById("GameOver").style.display = "inline-block";
-        } else {
-          this.board.activePuyo = this.board.puyoQueue.shift();
-          this.board.grid.push(this.board.activePuyo)
-          this.board.grid.push(this.board.activePuyo.childPuyo);
-          this.handleNewNext(this.board.puyoQueue[0]);
-        }
-      }
 
-      this.board.renderBoard(this.stage);
+
+    this.board.dropPuyo();
+    if(this.board.activePuyo.supported(this.board.grid) || this.board.activePuyo.childPuyo.xCoord === undefined){
+      let breaking = this.board.breakingPuyo();
+      this.board.grid = this.board.grid.filter(((puyo)=> breaking.indexOf(puyo) === -1))
+      if (this.board.puyoQueue.length <= 1){
+        this.board.puyoQueue = this.board.fillQueue(this.board.puyoQueue);
+      }
+      if (this.board.activePuyo.supported(this.board.grid) && this.board.activePuyo.yCoord === 20){
+        createjs.Ticker.removeEventListener("tick", this.handleTick);
+        document.removeEventListener('keydown', this.board.handleKeypress);
+        document.getElementById("GameOver").style.display = "inline-block";
+      } else {
+        this.board.activePuyo = this.board.puyoQueue.shift();
+        this.board.grid.push(this.board.activePuyo)
+        this.board.grid.push(this.board.activePuyo.childPuyo);
+        this.handleNewNext(this.board.puyoQueue[0]);
+      }
     }
+
+    this.board.renderBoard(this.stage);
   }
 
 }
