@@ -107,6 +107,7 @@ class Board {
     document.addEventListener("keydown", this.handleKeypress);
   }
     handleKeypress(e){
+      console.log(e.code);
       let activeNewCoord;
       let childNewCoord;
       let nextMoveIdx;
@@ -119,7 +120,7 @@ class Board {
       if ((this.activePuyo.childPuyo.AnimX === moveAry[this.activePuyo.childOrientation][0]
         )&& (
           this.activePuyo.childPuyo.AnimY === moveAry[this.activePuyo.childOrientation][1])){
-        if(e.code === "KeyA"){
+        if(e.code === "KeyA" || e.code === "ArrowLeft"){
           activeNewCoord = this.activePuyo.xCoord - 40;
           childNewCoord = this.activePuyo.childPuyo.xCoord - 40;
           if ((this.xValid(activeNewCoord, this.activePuyo.yCoord)
@@ -129,7 +130,7 @@ class Board {
             this.activePuyo.childPuyo.xCoord = childNewCoord;
             this.activePuyo.childPuyo.AnimX = childNewCoord;
           }
-        } else if(e.code === "KeyD"){
+        } else if(e.code === "KeyD" || e.code === "ArrowRight"){
           activeNewCoord = this.activePuyo.xCoord + 40;
           childNewCoord = this.activePuyo.childPuyo.xCoord + 40;
           if (this.xValid(activeNewCoord, this.activePuyo.yCoord) && this.xValid(childNewCoord, this.activePuyo.childPuyo.yCoord)){
@@ -138,7 +139,7 @@ class Board {
             this.activePuyo.childPuyo.xCoord = childNewCoord;
             this.activePuyo.childPuyo.AnimX = childNewCoord;
           }
-        } else if(e.code === "KeyW"){
+        } else if(e.code === "KeyW"|| e.code === "ArrowUp"){
           nextMoveIdx = this.activePuyo.childOrientation + 1;
           if(nextMoveIdx === moveAry.length){
             nextMoveIdx = 0;
@@ -148,7 +149,7 @@ class Board {
             this.activePuyo.childPuyo.xCoord = moveAry[nextMoveIdx][0]
             this.activePuyo.childPuyo.yCoord = moveAry[nextMoveIdx][1]
           }
-        } else if(e.code === "KeyS"){
+        } else if(e.code === "KeyS" || e.code === "ArrowDown"){
           nextMoveIdx = this.activePuyo.childOrientation - 1;
           if(nextMoveIdx < 0){
             nextMoveIdx = moveAry.length - 1
@@ -207,7 +208,6 @@ class Board {
 
       let circle = new createjs.Shape();
       stage.addChild(circle);
-      // circle.graphics.beginFill("greenyellow").drawCircle(puyo.AnimX, puyo.AnimY, 20);
       circle.graphics.beginFill(puyo.color).drawCircle(puyo.AnimX,puyo.AnimY,18);
       if (puyo.breaker){
         this.game.bitmap.x = puyo.AnimX-15;
@@ -524,7 +524,6 @@ class Game {
 
     let childCircle = new createjs.Shape();
     this.upNext.addChild(childCircle);
-    // childCircle.graphics.beginFill('greenyellow').drawCircle(70, 30, 20);
     childCircle.graphics.beginFill(childPuyo.color).drawCircle(70, 30, 18);
     if (childPuyo.breaker){
       this.bitmap.x = 55;
@@ -562,7 +561,7 @@ class Game {
     let startLength = this.board.grid.length;
     this.board.grid = this.board.grid.filter((puyo)=>  puyo.color !== "black");
     let newLength = this.board.grid.length;
-    if (startLength > newLength){
+    if (startLength > newLength && !window.muted){
       this.breakNoise.play();
     }
     if(this.board.activePuyo.supported(this.board.grid) || this.board.activePuyo.childPuyo.xCoord === undefined){
@@ -609,6 +608,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
   let startButton = document.getElementById("startGame");
   let restartButton = document.getElementById("restartGame")
   let gameOver = document.getElementById("GameOver");
+  let volControl = document.getElementById("vcDiv");
+  window.muted = false;
   startButton.addEventListener("click", () => {
     welcome.style.display = "none";
     return  new __WEBPACK_IMPORTED_MODULE_2__game_js__["a" /* default */]();
@@ -616,6 +617,16 @@ document.addEventListener("DOMContentLoaded", ()=>{
   restartButton.addEventListener("click", ()=>{
     gameOver.style.display ="none";
     return new __WEBPACK_IMPORTED_MODULE_2__game_js__["a" /* default */]();
+  })
+  volControl.addEventListener("click", ()=>{
+    console.log(window.muted);
+    volControl.innerHTML = ''
+    if(window.muted){
+      volControl.innerHTML = `<i class="fa fa-volume-up" aria-hidden="true"></i>`
+    } else {
+      volControl.innerHTML = `<i class="fa fa-volume-off" aria-hidden="true"></i>`
+    }
+    window.muted = !window.muted
   })
 
 

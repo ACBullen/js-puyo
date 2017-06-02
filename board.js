@@ -33,6 +33,7 @@ class Board {
     document.addEventListener("keydown", this.handleKeypress);
   }
     handleKeypress(e){
+      console.log(e.code);
       let activeNewCoord;
       let childNewCoord;
       let nextMoveIdx;
@@ -45,7 +46,7 @@ class Board {
       if ((this.activePuyo.childPuyo.AnimX === moveAry[this.activePuyo.childOrientation][0]
         )&& (
           this.activePuyo.childPuyo.AnimY === moveAry[this.activePuyo.childOrientation][1])){
-        if(e.code === "KeyA"){
+        if(e.code === "KeyA" || e.code === "ArrowLeft"){
           activeNewCoord = this.activePuyo.xCoord - 40;
           childNewCoord = this.activePuyo.childPuyo.xCoord - 40;
           if ((this.xValid(activeNewCoord, this.activePuyo.yCoord)
@@ -55,7 +56,7 @@ class Board {
             this.activePuyo.childPuyo.xCoord = childNewCoord;
             this.activePuyo.childPuyo.AnimX = childNewCoord;
           }
-        } else if(e.code === "KeyD"){
+        } else if(e.code === "KeyD" || e.code === "ArrowRight"){
           activeNewCoord = this.activePuyo.xCoord + 40;
           childNewCoord = this.activePuyo.childPuyo.xCoord + 40;
           if (this.xValid(activeNewCoord, this.activePuyo.yCoord) && this.xValid(childNewCoord, this.activePuyo.childPuyo.yCoord)){
@@ -64,7 +65,7 @@ class Board {
             this.activePuyo.childPuyo.xCoord = childNewCoord;
             this.activePuyo.childPuyo.AnimX = childNewCoord;
           }
-        } else if(e.code === "KeyW"){
+        } else if(e.code === "KeyW"|| e.code === "ArrowUp"){
           nextMoveIdx = this.activePuyo.childOrientation + 1;
           if(nextMoveIdx === moveAry.length){
             nextMoveIdx = 0;
@@ -74,7 +75,7 @@ class Board {
             this.activePuyo.childPuyo.xCoord = moveAry[nextMoveIdx][0]
             this.activePuyo.childPuyo.yCoord = moveAry[nextMoveIdx][1]
           }
-        } else if(e.code === "KeyS"){
+        } else if(e.code === "KeyS" || e.code === "ArrowDown"){
           nextMoveIdx = this.activePuyo.childOrientation - 1;
           if(nextMoveIdx < 0){
             nextMoveIdx = moveAry.length - 1
@@ -133,7 +134,6 @@ class Board {
 
       let circle = new createjs.Shape();
       stage.addChild(circle);
-      // circle.graphics.beginFill("greenyellow").drawCircle(puyo.AnimX, puyo.AnimY, 20);
       circle.graphics.beginFill(puyo.color).drawCircle(puyo.AnimX,puyo.AnimY,18);
       if (puyo.breaker){
         this.game.bitmap.x = puyo.AnimX-15;

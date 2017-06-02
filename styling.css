@@ -123,3 +123,16 @@ canvas {
   color:black;
   font-size: 30px;
 }
+
+#vcDiv {
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 0;
+}
+
+#vcDiv:hover {
+  cursor: pointer;
+}
+.fa::before{
+  font-size: 30px;
+}

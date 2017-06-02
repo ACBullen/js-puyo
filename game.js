@@ -65,7 +65,6 @@ class Game {
 
     let childCircle = new createjs.Shape();
     this.upNext.addChild(childCircle);
-    // childCircle.graphics.beginFill('greenyellow').drawCircle(70, 30, 20);
     childCircle.graphics.beginFill(childPuyo.color).drawCircle(70, 30, 18);
     if (childPuyo.breaker){
       this.bitmap.x = 55;
@@ -103,7 +102,7 @@ class Game {
     let startLength = this.board.grid.length;
     this.board.grid = this.board.grid.filter((puyo)=>  puyo.color !== "black");
     let newLength = this.board.grid.length;
-    if (startLength > newLength){
+    if (startLength > newLength && !window.muted){
       this.breakNoise.play();
     }
     if(this.board.activePuyo.supported(this.board.grid) || this.board.activePuyo.childPuyo.xCoord === undefined){
