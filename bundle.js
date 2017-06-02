@@ -107,7 +107,6 @@ class Board {
     document.addEventListener("keydown", this.handleKeypress);
   }
     handleKeypress(e){
-      console.log(e.code);
       let activeNewCoord;
       let childNewCoord;
       let nextMoveIdx;
@@ -619,7 +618,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
     return new __WEBPACK_IMPORTED_MODULE_2__game_js__["a" /* default */]();
   })
   volControl.addEventListener("click", ()=>{
-    console.log(window.muted);
     volControl.innerHTML = ''
     if(window.muted){
       volControl.innerHTML = `<i class="fa fa-volume-up" aria-hidden="true"></i>`

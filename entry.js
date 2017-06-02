@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
     return new Game();
   })
   volControl.addEventListener("click", ()=>{
-    console.log(window.muted);
     volControl.innerHTML = ''
     if(window.muted){
       volControl.innerHTML = `<i class="fa fa-volume-up" aria-hidden="true"></i>`

@@ -33,7 +33,6 @@ class Board {
     document.addEventListener("keydown", this.handleKeypress);
   }
     handleKeypress(e){
-      console.log(e.code);
       let activeNewCoord;
       let childNewCoord;
       let nextMoveIdx;
