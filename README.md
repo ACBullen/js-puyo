@@ -22,7 +22,9 @@ for each block and comparing them to the sum of the sum of their radii in
 pixels. For the active puyo blocks controlled by the player, the collision detection
 is performed in advance of attempts to rotate the puyo blocks, in the event
 that a block would rotate into another block, the rotation fails and the
-block falls as normal.
+block falls as normal. Animations use their own set of coordinates, which move
+towards the real coordinate of the block, preventing blocks from falling
+off-center to the grid.
 
 ### Breaking Blocks
 
@@ -52,5 +54,4 @@ instance so they can be removed from the board.
 ## Future Directions
 
 0. Audio loop for game play
-0. Sound effects for breaking puyo blocks
 0. AI opponent battle mode
