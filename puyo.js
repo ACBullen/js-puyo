@@ -6,6 +6,8 @@ class Puyo {
     this.parentPuyo = parentPuyo
     this.xCoord = xCoord;
     this.yCoord = yCoord;
+    this.AnimX = xCoord;
+    this.AnimY = yCoord;
     this.adjacentMatchingPuyo = [];
     this.breaker = breaker;
     this.childOrientation = 0;
@@ -16,6 +18,8 @@ class Puyo {
 
     if(this.yCoord === 460){
       isSupported = true;
+      this.AnimY = this.yCoord;
+      this.AnimX = this.xCoord;
       if(this.parentPuyo){
         this.parentPuyo.childPuyo = {};
       }
@@ -37,6 +41,8 @@ class Puyo {
         )&&(this.xCoord === puyo.xCoord)){
 
         isSupported = true;
+        this.AnimY = this.yCoord;
+        this.AnimX = this.xCoord;
         if(this.parentPuyo){
           this.parentPuyo.childPuyo = {};
         }
