@@ -41,6 +41,15 @@ button:hover {
   background-color: black;
   padding: 5px;
 }
+h4 {
+  font-size: 22px;
+}
+
+h5{
+  font-size: 18px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 
 .gameConcerns{
   display: flex;
