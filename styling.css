@@ -1,7 +1,13 @@
 #PuyoField {
-  border: 1px solid black;
+  border: 1px solid #ADFF2F;
   margin-left: 50px;
   border-radius: 3px;
+  background-image: url(assets/gridBG3.png);
+  background-origin: content-box;
+}
+
+#UpNext{
+  background: transparent;
 }
 img {
 max-width: 100%;
@@ -14,7 +20,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: yellowgreen;
+  color: greenyellow;
   background-color: black;
 }
 
@@ -44,12 +50,17 @@ button:hover {
 }
 
 h1 {
-  font-size: 40px;
+  font-size: 46px;
+}
+
+h4 {
+  margin-top: 70px;
 }
 
 a {
   color: inherit;
 }
+
 
 canvas {
   background-color: white;
@@ -62,18 +73,18 @@ canvas {
 }
 
 #infoPanel div {
-  border: 1px solid gray;
+  border: 1px solid #ADFF2F;
   text-align: center;
   border-radius: 3px;
-  background-color: white;
-  font-size: 18px;
-  color: black;
+  background-color: transparent;
+  font-size: 24px;
+  color: greenyellow;
 }
 
 #infoPanel h4 {
   margin-bottom: 0;
   margin-top: 0;
-  font-size: 22px;
+  font-size: 26px;
 }
 
 #title {
@@ -82,7 +93,7 @@ canvas {
 
 #welcome {
   position: absolute;
-  top: 70px;
+  top: 85px;
   display: flex;
   flex-direction: column;
   width: 30%;
@@ -91,7 +102,7 @@ canvas {
   background-color: white;
   border: 1px solid gray;
   border-radius: 3px;
-  font-size: 20px;
+  font-size: 24px;
   z-index: 3;
   padding: 10px;
   text-align: center;
@@ -104,10 +115,11 @@ canvas {
   display: none;
   width: 30%;
   background-color: white;
-  border: 1px solid grey;
+  border: 1px solid #ADFF2F;
   border-radius: 3px;
   z-index: 4;
   text-align: center;
   padding: 10px;
   color:black;
+  font-size: 30px;
 }

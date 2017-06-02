@@ -133,7 +133,7 @@ class Board {
 
       let circle = new createjs.Shape();
       stage.addChild(circle);
-      circle.graphics.beginFill("black").drawCircle(puyo.AnimX, puyo.AnimY, 20);
+      // circle.graphics.beginFill("greenyellow").drawCircle(puyo.AnimX, puyo.AnimY, 20);
       circle.graphics.beginFill(puyo.color).drawCircle(puyo.AnimX,puyo.AnimY,18);
       if (puyo.breaker){
         this.game.bitmap.x = puyo.AnimX-15;

@@ -10,6 +10,7 @@ class Game {
     this.gameTime = 0;
     this.timeString = "0:00"
     this.initialTime = Math.floor(createjs.Ticker.getTime()/1000)|| 0;
+    this.breakNoise = new Audio('./assets/8-bit-soft-impact.wav');
 
     let scoreBoard = document.getElementById("scoreBoard");
     let scoreString = document.createTextNode(`${this.score}`);
@@ -54,7 +55,7 @@ class Game {
     let childPuyo = puyo.childPuyo;
     let circle = new createjs.Shape();
     this.upNext.addChild(circle);
-    circle.graphics.beginFill("black").drawCircle(30, 30, 20);
+    // circle.graphics.beginFill("greenyellow").drawCircle(30, 30, 20);
     circle.graphics.beginFill(puyo.color).drawCircle(30, 30, 18);
     if (puyo.breaker){
       this.bitmap.x = 15;
@@ -64,7 +65,7 @@ class Game {
 
     let childCircle = new createjs.Shape();
     this.upNext.addChild(childCircle);
-    childCircle.graphics.beginFill('black').drawCircle(70, 30, 20);
+    // childCircle.graphics.beginFill('greenyellow').drawCircle(70, 30, 20);
     childCircle.graphics.beginFill(childPuyo.color).drawCircle(70, 30, 18);
     if (childPuyo.breaker){
       this.bitmap.x = 55;
@@ -99,7 +100,12 @@ class Game {
         removal.push(puyo)
       }
     })
+    let startLength = this.board.grid.length;
     this.board.grid = this.board.grid.filter((puyo)=>  puyo.color !== "black");
+    let newLength = this.board.grid.length;
+    if (startLength > newLength){
+      this.breakNoise.play();
+    }
     if(this.board.activePuyo.supported(this.board.grid) || this.board.activePuyo.childPuyo.xCoord === undefined){
 
       if (this.board.puyoQueue.length <= 1){
