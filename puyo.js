@@ -37,10 +37,24 @@ class Puyo {
         } else if(puyo === this.parentPuyo){
           null;
 
-      } else if ((puyo.yCoord - this.yCoord < 41 && puyo.yCoord - this.yCoord > 0 && this.yCoord !== puyo.yCoord
+      } else if ((puyo.yCoord - this.yCoord === 40 && puyo.yCoord - this.yCoord > 0 && this.yCoord !== puyo.yCoord
         )&&(this.xCoord === puyo.xCoord)){
 
         isSupported = true;
+        this.AnimY = this.yCoord;
+        this.AnimX = this.xCoord;
+        if(this.parentPuyo){
+          this.parentPuyo.childPuyo = {};
+        }
+        if (this.childPuyo){
+          this.childPuyo.parentPuyo = {};
+        }
+        this.parentPuyo = {};
+        this.childPuyo = {};
+      } else if((puyo.yCoord - this.yCoord < 40 && puyo.yCoord - this.yCoord > 0 && this.yCoord !== puyo.yCoord
+      )&&(this.xCoord === puyo.xCoord)){
+        this.yCoord += (puyo.yCoord - this.yCoord)
+        isSupported = true
         this.AnimY = this.yCoord;
         this.AnimX = this.xCoord;
         if(this.parentPuyo){

@@ -98,7 +98,8 @@ class Board {
     this.activePuyo.childPuyo.AnimX = 140;
     this.activePuyo.childPuyo.AnimY = 20;
 
-    this.bump = new Audio('./assets/170141_timgormly_8-bit-bump.mp3');
+    this.bump = new Audio('./assets/170141__timgormly__8-bit-bump.mp3');
+
 
     this.game.handleNewNext(this.puyoQueue[0]);
 
@@ -389,10 +390,24 @@ class Puyo {
         } else if(puyo === this.parentPuyo){
           null;
 
-      } else if ((puyo.yCoord - this.yCoord < 41 && puyo.yCoord - this.yCoord > 0 && this.yCoord !== puyo.yCoord
+      } else if ((puyo.yCoord - this.yCoord === 40 && puyo.yCoord - this.yCoord > 0 && this.yCoord !== puyo.yCoord
         )&&(this.xCoord === puyo.xCoord)){
 
         isSupported = true;
+        this.AnimY = this.yCoord;
+        this.AnimX = this.xCoord;
+        if(this.parentPuyo){
+          this.parentPuyo.childPuyo = {};
+        }
+        if (this.childPuyo){
+          this.childPuyo.parentPuyo = {};
+        }
+        this.parentPuyo = {};
+        this.childPuyo = {};
+      } else if((puyo.yCoord - this.yCoord < 40 && puyo.yCoord - this.yCoord > 0 && this.yCoord !== puyo.yCoord
+      )&&(this.xCoord === puyo.xCoord)){
+        this.yCoord += (puyo.yCoord - this.yCoord)
+        isSupported = true
         this.AnimY = this.yCoord;
         this.AnimX = this.xCoord;
         if(this.parentPuyo){
@@ -495,7 +510,7 @@ class Game {
     this.board.renderBoard(this.stage);
     this.handleTick = this.handleTick.bind(this);
     createjs.Ticker.addEventListener("tick", this.handleTick);
-    createjs.Ticker.setFPS(45);
+    createjs.Ticker.setFPS(35);
   }
 
   handleTimeUpdate(){

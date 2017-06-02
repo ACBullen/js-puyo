@@ -24,7 +24,9 @@ class Board {
     this.activePuyo.childPuyo.AnimX = 140;
     this.activePuyo.childPuyo.AnimY = 20;
 
-    this.bump = new Audio('./assets/170141_timgormly_8-bit-bump.mp3');
+
+    this.bump = new Audio('./assets/170141__timgormly__8-bit-bump.mp3');
+
 
     this.game.handleNewNext(this.puyoQueue[0]);
 
