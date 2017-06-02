@@ -4,7 +4,9 @@
   border-radius: 3px;
 }
 img {
-  max-width: 100%;
+max-width: 100%;
+display: inline-block;
+padding: 20px;
 }
 
 body {
@@ -20,6 +22,7 @@ button {
   font-family: 'VT323', monospace;
   font-size: 22px;
   padding: 5px;
+  max-width: 80px;
   border-top: 2px solid lightgray;
   border-left: 2px solid lightgray;
   border-right: 2px solid gray;
@@ -80,8 +83,11 @@ canvas {
 #welcome {
   position: absolute;
   top: 70px;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
   width: 30%;
+  align-items: center;
+
   background-color: white;
   border: 1px solid gray;
   border-radius: 3px;
