@@ -91,7 +91,7 @@ class Board {
       if(newCoord < 20 || newCoord > 220){
         return false
       } else if (this.grid.some(puyo=> (
-        (puyo.xCoord === newCoord && Math.abs(puyo.yCoord - curHeight) < 35) && (
+        (puyo.xCoord === newCoord && Math.abs(puyo.yCoord - curHeight) < 41) && (
           puyo !== this.activePuyo && puyo !== this.activePuyo.childPuyo
         )))) {
         return false
