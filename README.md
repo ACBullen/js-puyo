@@ -32,6 +32,8 @@ puyo blocks. For those puyo blocks in the array, the game iterates through those
 and checks for other adjacent matching-colored puyo blocks and adds those to the
 array if they are not already there.
 
+![block breaking example](./assets/js-puyo-ex2.gif)
+
 ```JS
 for(let i = 0; i < breaking.length; i++){
   breaking[i].adjacentPuyos(this.grid);
