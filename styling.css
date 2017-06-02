@@ -26,9 +26,9 @@ body {
 
 button {
   font-family: 'VT323', monospace;
-  font-size: 22px;
+  font-size: 28px;
   padding: 5px;
-  max-width: 80px;
+  max-width: 100px;
   border-top: 2px solid lightgray;
   border-left: 2px solid lightgray;
   border-right: 2px solid gray;
@@ -97,14 +97,14 @@ canvas {
   width: 30%;
   align-items: center;
 
-  background-color: white;
-  border: 1px solid gray;
+  background-color: black;
+  border: 1px solid #ADFF2F;
   border-radius: 3px;
   font-size: 24px;
   z-index: 3;
   padding: 10px;
   text-align: center;
-  color: black;
+  color: #ADFF2F;
 }
 
 #GameOver {
@@ -112,13 +112,13 @@ canvas {
   top: 125px;
   display: none;
   width: 30%;
-  background-color: white;
+  background-color: black;
   border: 1px solid #ADFF2F;
   border-radius: 3px;
   z-index: 4;
   text-align: center;
   padding: 10px;
-  color:black;
+
   font-size: 30px;
 }
 
