@@ -85,7 +85,21 @@ class Game {
     this.board.advanceChildToTarget();
     this.board.dropPuyo();
     let breaking = this.board.breakingPuyo();
-    this.board.grid = this.board.grid.filter(((puyo)=> breaking.indexOf(puyo) === -1))
+    let removal = [];
+    this.board.grid.forEach((puyo)=>{
+      if (puyo.color === "#cccccc"){
+        puyo.color = "#737373"
+      } else if (puyo.color === "#737373"){
+        puyo.color = "#ff6600";
+      } else if (puyo.color === "#ff6600"){
+        puyo.color = "#737374"
+      } else if (puyo.color === "#737374"){
+        puyo.color = "black";
+      } else if (puyo.color === "black"){
+        removal.push(puyo)
+      }
+    })
+    this.board.grid = this.board.grid.filter((puyo)=>  puyo.color !== "black");
     if(this.board.activePuyo.supported(this.board.grid) || this.board.activePuyo.childPuyo.xCoord === undefined){
 
       if (this.board.puyoQueue.length <= 1){

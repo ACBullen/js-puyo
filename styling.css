@@ -3,6 +3,9 @@
   margin-left: 50px;
   border-radius: 3px;
 }
+img {
+  max-width: 100%;
+}
 
 body {
   font-family: 'VT323', monospace;

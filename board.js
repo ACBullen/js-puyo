@@ -34,9 +34,9 @@ class Board {
       let nextMoveIdx;
       let moveAry = [
         [this.activePuyo.xCoord + 40, this.activePuyo.yCoord],
-        [this.activePuyo.xCoord, this.activePuyo.yCoord + 42],
+        [this.activePuyo.xCoord, this.activePuyo.yCoord + 44],
         [this.activePuyo.xCoord - 40, this.activePuyo.yCoord],
-        [this.activePuyo.xCoord, this.activePuyo.yCoord - 42]
+        [this.activePuyo.xCoord, this.activePuyo.yCoord - 44]
       ];
       if ((this.activePuyo.childPuyo.xCoord === moveAry[this.activePuyo.childOrientation][0]
         )&& (
@@ -44,7 +44,8 @@ class Board {
         if(e.code === "KeyA"){
           activeNewCoord = this.activePuyo.xCoord - 40;
           childNewCoord = this.activePuyo.childPuyo.xCoord - 40;
-          if (this.xValid(activeNewCoord, this.activePuyo.yCoord) && this.xValid(childNewCoord, this.activePuyo.childPuyo.yCoord)){
+          if ((this.xValid(activeNewCoord, this.activePuyo.yCoord)
+            ) && (this.xValid(childNewCoord, this.activePuyo.childPuyo.yCoord))){
             this.activePuyo.xCoord = activeNewCoord;
             this.activePuyo.childPuyo.xCoord = childNewCoord;
           }
@@ -136,9 +137,9 @@ class Board {
     let active = this.activePuyo;
     let moveAry = [
       [active.xCoord + 40, active.yCoord],
-      [active.xCoord, active.yCoord + 42],
+      [active.xCoord, active.yCoord + 44],
       [active.xCoord - 40, active.yCoord],
-      [active.xCoord, active.yCoord - 42]
+      [active.xCoord, active.yCoord - 44]
     ];
 
 
@@ -152,23 +153,23 @@ class Board {
           }
         } else {
           if((child.yCoord - moveAry[active.childOrientation][1]) < 0){
-            child.yCoord += 21
+            child.yCoord += 22
             if (child.yCoord > 453){
               child.yCoord = 453;
             }
           } else {
-            child.yCoord -= 21
+            child.yCoord -= 22
           }
         }
       } else {
         if(child.yCoord !== moveAry[active.childOrientation][1]){
           if ((child.yCoord - moveAry[active.childOrientation][1]) < 0){
-            child.yCoord += 21;
+            child.yCoord += 22;
             if (child.yCoord > 450){
               child.yCoord = 450;
             }
           } else {
-            child.yCoord -= 21;
+            child.yCoord -= 22;
           }
         } else {
           if ((child.xCoord - moveAry[active.childOrientation][0]) < 0){
@@ -193,10 +194,10 @@ class Board {
       }
       if(!puyo.supported(grid)){
         if(puyo === this.activePuyo){
-          puyo.yCoord += 5;
-          puyo.childPuyo.yCoord += 5;
+          puyo.yCoord += 4;
+          puyo.childPuyo.yCoord += 4;
         } else if (puyo.parentPuyo !== this.activePuyo) {
-            puyo.yCoord += 5;
+            puyo.yCoord += 4;
         }
       }
       if (puyo.yCoord > 460){
@@ -208,7 +209,8 @@ class Board {
   breakingPuyo(){
     let breaking = [];
     this.grid.forEach((puyo, idx, grid)=>{
-      if (puyo.supported(grid) && puyo.breaker){
+      if (puyo.supported(grid) && puyo.breaker && (
+        ["red", "green", "blue", 'yellow'].indexOf(puyo.color) > -1)){
         puyo.adjacentPuyos(grid);
         puyo.adjacentMatchingPuyo.forEach((puyo2)=>{
           if(breaking.indexOf(puyo2) === -1){
@@ -225,6 +227,7 @@ class Board {
           breaking.push(puyo3);
         }
       });
+      breaking[i].color = "#cccccc"
     }
     this.game.score += ((breaking.length+breaking.length/2) * 100);
     let scoreBoard = document.getElementById("scoreBoard");
