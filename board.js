@@ -24,7 +24,7 @@ class Board {
     this.activePuyo.childPuyo.AnimX = 140;
     this.activePuyo.childPuyo.AnimY = 20;
 
-    this.bump = new Audio('https://raw.githubusercontent.com/acbullen/js-tetris/master/vendor/assets/170141_timgormly_8-bit-bump.mp3');
+    this.bump = new Audio('./assets/170141_timgormly_8-bit-bump.mp3');
 
     this.game.handleNewNext(this.puyoQueue[0]);
 
