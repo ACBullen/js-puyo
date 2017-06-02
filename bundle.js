@@ -98,6 +98,8 @@ class Board {
     this.activePuyo.childPuyo.AnimX = 140;
     this.activePuyo.childPuyo.AnimY = 20;
 
+    this.bump = new Audio('./assets/170141__timgormly__8-bit-bump.mp3');
+
     this.game.handleNewNext(this.puyoQueue[0]);
 
     this.bitmap = this.game.bitmap;
@@ -163,11 +165,14 @@ class Board {
     }
     xValid(newCoord, curHeight){
       if(newCoord < 20 || newCoord > 220){
+      this.bumpNoise();
         return false
+
       } else if (this.grid.some(puyo=> (
         (puyo.xCoord === newCoord && Math.abs(puyo.yCoord - curHeight) < 41) && (
           puyo !== this.activePuyo && puyo !== this.activePuyo.childPuyo
         )))) {
+        this.bumpNoise();
         return false
       }
       return true
@@ -175,12 +180,20 @@ class Board {
 
     yValid(newCoord, curWidth){
       if (newCoord < 20){
+        this.bumpNoise();
         return false
+
       } else if(this.grid.some((puyo)=>((Math.abs(newCoord - puyo.yCoord) < 41 && Math.abs(puyo.xCoord - curWidth) < 35)
     ))){
+        this.bumpNoise();
         return false
       }
       return true
+    }
+    bumpNoise(){
+      if(!window.muted){
+        this.bump.play();
+      }
     }
 
   fillQueue(remnant){
