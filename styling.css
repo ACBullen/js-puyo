@@ -9,6 +9,7 @@
 #UpNext{
   background: transparent;
 }
+
 img {
 max-width: 100%;
 display: inline-block;
@@ -20,7 +21,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: greenyellow;
+  color: #ADFF2F;
   background-color: black;
 }
 
@@ -33,6 +34,7 @@ button {
   border-left: 2px solid lightgray;
   border-right: 2px solid gray;
   border-bottom: 2px solid gray;
+  background-color: white;
 }
 
 button:hover {
